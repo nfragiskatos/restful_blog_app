@@ -36,6 +36,25 @@ app.get("/blogs", function(req, res) {
     });
 });
 
+// NEW 
+app.get("/blogs/new", function(req, res) {
+    res.render("new"); 
+});
+
+// CREATE
+app.post("/blogs", function(req, res) {
+    // create blog
+    Blog.create(req.body.blog, function(err, newBlog) {
+        if (err) {
+            res.render("new");
+        }
+        else {
+            // the redirect to index
+            res.redirect("/blogs");
+        }
+    });
+});
+
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("server is running...");
