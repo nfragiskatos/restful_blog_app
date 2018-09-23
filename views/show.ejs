@@ -10,7 +10,19 @@
                 <span><%= blog.created.toDateString() %></span>   
             </div>
             <div class="description">
-                <p><%= blog.body %></p>
+                <!-- ******** Notice the %- instead of the usual %=
+                This is because using %- will evaluate blog.body as
+                code. And we want this for this particular instance
+                because the use should be able to add paragraphs and
+                breaks and style their blog content how they want it.
+                If we don't allow this, then any breaks or indents they add
+                won't be preserved in the post.
+                
+                **WARNING: This does not sanitize the input though. That's an
+                EXTRA step that we want to do to prevent people from putting
+                in javascript tags, and running unwanted code. There is a
+                package called express-sanitizer that can help with that-->
+                <p><%- blog.body %></p>
             </div>
         </div>
     </div>
