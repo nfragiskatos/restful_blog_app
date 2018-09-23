@@ -1,0 +1,28 @@
+<% include partials/header %>
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit <%= blog.title %></div>
+    
+    <!-- the ?_method=PUT is a workaround because HTML forms can't actually handle
+    a PUT request.... so you add this, and then you install method-override into your
+    npm package and use that to listen and override the default behavior... It's kludgy
+    but it's needed if we want to follow RESTful routing. -->
+    <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST" class="ui form">
+        <div class="field">
+            <label>Title</label>
+            <input type="text" name="blog[title]" value="<%= blog.title %>">
+        </div>
+        
+        <div class="field">
+            <label>Image</label>
+            <input type="text" name="blog[image]" value="<%= blog.image %>">
+        </div>
+        
+        <div class="field">
+            <label>Blog Content</label>
+            <textarea name="blog[body]"><%= blog.body %></textarea>
+        </div>
+        
+        <input type="submit" class="ui violet big basic button">
+    </form>
+</div>
+<% include partials/footer %>
