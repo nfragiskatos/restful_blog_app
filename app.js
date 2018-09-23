@@ -90,6 +90,18 @@ app.put("/blogs/:id", function(req, res) {
     })
 });
 
+// DESTROY
+app.delete("/blogs/:id", function(req, res) {
+    //destroy blog
+    Blog.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.redirect("/blogs");
+        } else {
+            res.redirect("/blogs");
+        }
+    })
+});
+
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("server is running...");
